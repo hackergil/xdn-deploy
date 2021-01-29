@@ -6,4 +6,4 @@ cache: yarn
 git:
   depth: false
 jobs:
-  - script: "xdn-deploy.sh"
+  - script: "./xdn-deploy.sh"
