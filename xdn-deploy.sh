@@ -25,9 +25,11 @@ function deploy_spa {
     cp ../xdn.config.js .
 
     # add xdn endpoint to app.module.ts and index.html
-    sed s/localhost\:9002/${ENDPOINT}/ src/app/app.module.ts
+    sed s/localhost\:9002/${ENDPOINT}/ src/app/app.module.ts > app.module.ts
+    cp app.module.ts src/app/app.module.ts
 
-    sed s/localhost\:9002/${ENDPOINT}/ src/index.html
+    sed s/localhost\:9002/${ENDPOINT}/ src/index.html > index.html
+    cp index.html src/index.html
 
     cp routes.ts spartacus/
 
