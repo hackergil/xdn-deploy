@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-ENDPOINT="gilberto-alvarado-spartacus-default.moovweb-edge.io"
+ENDPOINT='gilberto-alvarado-spartacus-default.moovweb-edge.io'
+APP='spartacus'
 ANGULAR_CLI_VERSION='~10.1.0'
 
 function deploy_spa {
@@ -13,8 +14,8 @@ function deploy_spa {
     echo "-----"
     echo "Creating new Spartacus shell app"
 
-    ng new spartacus --style=scss --routing=false
-    cd spartacus
+    ng new ${APP} --style=scss --routing=false
+    cd ${APP}
     ng add @spartacus/schematics --ssr --pwa
 
     echo "-----"
@@ -24,19 +25,21 @@ function deploy_spa {
     cd ..
 
     # add CX endpoint to xdn.config.js
-    cp xdn.config.js spartacus/
+    cp xdn.config.js ${APP}/
 
     # add xdn endpoint to app.module.ts and index.html
-    sed s/localhost\:9002/${ENDPOINT}/ src/app/app.module.ts > app.module.ts
-    cp app.module.ts spartacus/src/app/app.module.ts
+    sed s/localhost\:9002/${ENDPOINT}/ ${APP}/src/app/app.module.ts > app.module.ts
+    cp app.module.ts ${APP}/src/app/app.module.ts
 
-    sed s/localhost\:9002/${ENDPOINT}/ src/index.html > index.html
-    cp index.html spartacus/src/index.html
+    sed s/localhost\:9002/${ENDPOINT}/ ${APP}/src/index.html > index.html
+    cp index.html ${APP}/src/index.html
 
-    cp routes.ts spartacus/
+    cp routes.ts ${APP}/
 
     echo "-----"
     echo "Starting XDN deployment"
+
+    cd ${APP}
     xdn deploy --branch --token=$XDN_DEPLOY_TOKEN
 }
 
