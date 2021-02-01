@@ -40,7 +40,7 @@ function deploy_spa {
     echo "Starting XDN deployment"
 
     cd ${APP}
-    xdn deploy --branch --token=$XDN_DEPLOY_TOKEN
+    xdn deploy --environment staging --branch --token=$XDN_DEPLOY_TOKEN
 }
 
 deploy_spa
