@@ -36,11 +36,6 @@ function deploy_spa {
 
     cp routes.ts ${APP}/
 
-    echo "-----"
-    echo "Starting XDN deployment"
-
-    cd ${APP}
-    xdn deploy --environment=staging --branch --token=$XDN_DEPLOY_TOKEN
 }
 
 deploy_spa
